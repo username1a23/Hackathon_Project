@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://da0mogvd3i0ha"]
+
+[ext_resource type="Script" path="res://scripts/coin.gd" id="1_3hjcj"]
+[ext_resource type="Texture2D" uid="uid://cw7s2k505co7a" path="res://assets/Golden Trophy Medium.png" id="2_amj2g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xr8l4"]
+atlas = ExtResource("2_amj2g")
+region = Rect2(0, 0, 263, 251)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2gi8c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xr8l4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1i8jp"]
+radius = 126.107
+
+[node name="Trophy" type="Area2D"]
+scale = Vector2(0.12, 0.12)
+script = ExtResource("1_3hjcj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-1, 0)
+sprite_frames = SubResource("SpriteFrames_2gi8c")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1i8jp")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
